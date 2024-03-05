@@ -1,0 +1,112 @@
+:root {
+  --bg: #fbf7f4;
+  --clr: #aee1cd;
+}
+
+div {
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  perspective: 50vmin;
+}
+
+.nucl {
+  position: relative;
+  width: 10vmin;
+  height: 10vmin;
+  background: radial-gradient(circle, #3cf 50%, #0000 0) 50% 50%/60% 60% space, radial-gradient(circle, #3fc 50%, #0000 0) 50% 15%/60% 40% space, radial-gradient(circle, #f9c 50%, #0000 0) 50% 50%/50% 90% space, radial-gradient(circle, #3cf 50%, #0000 0) 0 0/45% 45% space;
+}
+.nucl .cont {
+  position: relative;
+  width: 50vmin;
+  height: 50vmin;
+  translate: -20vmin -20vmin;
+  animation: turn 60s linear infinite forwards;
+}
+.nucl .ele {
+  width: 50vmin;
+  height: 50vmin;
+  top: 0;
+  left: 0;
+  border-radius: 100%;
+  border: 1px dashed color-mix(in lab, var(--clr), #0003 30%);
+  position: absolute;
+  z-index: 1;
+  transform: rotatez(calc(var(--r) * 180deg / var(--t))) rotatex(calc(var(--r) * 180deg / var(--t))) rotatey(calc(var(--r) * 180deg / var(--t)));
+}
+.nucl .ele .dot {
+  position: absolute;
+  width: 3vmin;
+  height: 3vmin;
+  top: 0;
+  left: 0;
+  background-color: var(--clr);
+  border-radius: 100%;
+  offset-path: border-box;
+  offset-distance: 0%;
+  offset-rotate: 90deg;
+  animation: rot linear 4s infinite forwards calc(var(--r) * -1s);
+  z-index: 5;
+}
+.nucl .ele .dot::before, .nucl .ele .dot::after {
+  content: "";
+  position: absolute;
+  width: 3vmin;
+  height: 3vmin;
+  top: 0;
+  left: 0;
+  background-color: var(--clr);
+  border-radius: 100%;
+  transform: rotatex(90deg);
+}
+.nucl .ele .dot::after {
+  transform: rotatey(90deg);
+}
+.nucl .ele .dot .fill {
+  position: absolute;
+  width: 3vmin;
+  height: 3vmin;
+  top: 0;
+  left: 0;
+  background-color: var(--clr);
+  border-radius: 100%;
+  background-color: var(--clr);
+  border-radius: 100%;
+  transform: rotatex(45deg) rotatey(45deg);
+}
+.nucl .ele .dot .fill::before, .nucl .ele .dot .fill::after {
+  content: "";
+  position: absolute;
+  width: 3vmin;
+  height: 3vmin;
+  top: 0;
+  left: 0;
+  background-color: var(--clr);
+  border-radius: 100%;
+  transform: rotatex(90deg);
+}
+.nucl .ele .dot .fill::after {
+  transform: rotatey(90deg);
+}
+
+.nucl:hover .ele {
+  border-color: color-mix(in lab, var(--clr), #000 50%);
+}
+
+@keyframes turn {
+  to {
+    transform: rotatex(360deg) rotatey(360deg) rotatez(360deg);
+  }
+}
+@keyframes rot {
+  to {
+    offset-distance: 100%;
+  }
+}
